@@ -72,11 +72,11 @@ public class JwtUtil {
 			Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
 			return true;
 		} catch (SecurityException | MalformedJwtException | UnsupportedJwtException e) {
-			throw new RuntimeException("유효하지 않은 JWT 서명입니다.", e);
+			throw new RuntimeException("Invalid JWT signature.", e);
 		} catch (ExpiredJwtException e) {
 			throw new RuntimeException("토큰이 만료되었습니다.", e);
 		} catch (IllegalArgumentException e) {
-			throw new RuntimeException("JWT 클레임이 비어 있습니다.", e);
+			throw new RuntimeException("JWT claims is empty.", e);
 		}
 	}
 
@@ -90,5 +90,12 @@ public class JwtUtil {
 			return bearerToken.substring(7);
 		}
 		return null;
+	}
+
+	public String substringToken(String token) {
+		if (StringUtils.hasText(token) && token.startsWith(BEARER_PREFIX)) {
+			return token.substring(BEARER_PREFIX.length());
+		}
+		throw new NullPointerException("토큰을 찾을 수 없습니다.");
 	}
 }

@@ -2,9 +2,9 @@ package com.sungkyunkwan.tload.domain.user.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.sungkyunkwan.tload.domain.user.dto.SigninRequestDto;
 import com.sungkyunkwan.tload.domain.user.dto.SigninResponseDto;
@@ -15,7 +15,7 @@ import com.sungkyunkwan.tload.domain.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/auth")
 public class UserController {

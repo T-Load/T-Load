@@ -8,20 +8,23 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import com.sungkyunkwan.tload.domain.user.entity.User;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
 public class JwtUtil {
 	public static final String AUTHORIZATION_HEADER = "Authorization";
+	public final String AUTHORITIES_KEY = "auth";
 	public static final String BEARER_PREFIX = "Bearer ";
 
 	@Value("${jwt.access.token}")
@@ -40,10 +43,12 @@ public class JwtUtil {
 		key = Keys.hmacShaKeyFor(bytes);
 	}
 
-	public String createAccessToken(String username) {
+	public String createAccessToken(User user) {
 		Date now = new Date();
 		return BEARER_PREFIX + Jwts.builder()
-			.setSubject(username)
+			.setSubject(user.getEmail())
+			.claim(AUTHORITIES_KEY, user.getRole())
+			.setIssuedAt(now)
 			.setExpiration(new Date(now.getTime() + accessTokenTime))
 			.signWith(key, signatureAlgorithm)
 			.compact();
@@ -52,6 +57,7 @@ public class JwtUtil {
 	public String createRefreshToken() {
 		Date now = new Date();
 		return Jwts.builder()
+			.setIssuedAt(now)
 			.setExpiration(new Date(now.getTime() + refreshTokenTime))
 			.signWith(key, signatureAlgorithm)
 			.compact();
@@ -66,11 +72,11 @@ public class JwtUtil {
 			Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
 			return true;
 		} catch (SecurityException | MalformedJwtException | UnsupportedJwtException e) {
-			throw new RuntimeException("Invalid JWT signature.", e);
+			throw new RuntimeException("유효하지 않은 JWT 서명입니다.", e);
 		} catch (ExpiredJwtException e) {
 			throw new RuntimeException("토큰이 만료되었습니다.", e);
 		} catch (IllegalArgumentException e) {
-			throw new RuntimeException("JWT claims is empty.", e);
+			throw new RuntimeException("JWT 클레임이 비어 있습니다.", e);
 		}
 	}
 
@@ -84,9 +90,5 @@ public class JwtUtil {
 			return bearerToken.substring(7);
 		}
 		return null;
-	}
-
-	public String substringToken(String token) {
-		return token.substring(BEARER_PREFIX.length());
 	}
 }

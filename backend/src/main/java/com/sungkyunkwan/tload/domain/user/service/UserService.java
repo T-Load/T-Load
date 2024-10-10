@@ -3,6 +3,8 @@ package com.sungkyunkwan.tload.domain.user.service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.sungkyunkwan.tload.domain.user.dto.SigninRequestDto;
+import com.sungkyunkwan.tload.domain.user.dto.SigninResponseDto;
 import com.sungkyunkwan.tload.domain.user.dto.SignupRequestDto;
 import com.sungkyunkwan.tload.domain.user.dto.SignupResponseDto;
 import com.sungkyunkwan.tload.domain.user.entity.User;
@@ -40,5 +42,19 @@ public class UserService {
 		userRepository.save(user);
 
 		return new SignupResponseDto(user);
+	}
+
+	public SigninResponseDto login(SigninRequestDto signinRequestDto) {
+		User user = userRepository.findByEmail(signinRequestDto.getEmail())
+			.orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
+
+		if (!passwordEncoder.matches(signinRequestDto.getPassword(), user.getPassword())) {
+			throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+		}
+
+		String accessToken = jwtUtil.createAccessToken(user);
+		String refreshToken = jwtUtil.createRefreshToken();
+
+		return new SigninResponseDto(accessToken, refreshToken);
 	}
 }

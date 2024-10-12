@@ -13,7 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.sungkyunkwan.tload.security.jwt.JwtAuthenticationFilter;
 import com.sungkyunkwan.tload.security.jwt.JwtAuthorizationFilter;
 import com.sungkyunkwan.tload.security.jwt.JwtUtil;
 import com.sungkyunkwan.tload.security.user.UserDetailsServiceImpl;
@@ -41,13 +40,6 @@ public class WebSecurityConfig {
 	}
 
 	@Bean
-	public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
-		JwtAuthenticationFilter filter = new JwtAuthenticationFilter(jwtUtil);
-		filter.setAuthenticationManager(authenticationManager(authenticationConfiguration));
-		return filter;
-	}
-
-	@Bean
 	public Filter jwtAuthorizationFilter() {
 		return new JwtAuthorizationFilter(jwtUtil, userDetailsService);
 	}
@@ -67,8 +59,7 @@ public class WebSecurityConfig {
 				.anyRequest().authenticated()
 		);
 
-		http.addFilterBefore(jwtAuthorizationFilter(), JwtAuthenticationFilter.class);
-		http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+		http.addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 
 		return http.build();
 	}

@@ -3,6 +3,7 @@ package com.sungkyunkwan.tload.domain.user.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,12 +24,12 @@ public class UserController {
 	private final UserService userService;
 
 	@PostMapping("/signup")
-	public ResponseEntity<SignupResponseDto> signup(@Valid SignupRequestDto signupRequestDto) {
+	public ResponseEntity<SignupResponseDto> signup(@Valid @RequestBody SignupRequestDto signupRequestDto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.signup(signupRequestDto));
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<SigninResponseDto> login(@Valid SigninRequestDto signinRequestDto) {
+	public ResponseEntity<SigninResponseDto> login(@Valid @RequestBody SigninRequestDto signinRequestDto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.login(signinRequestDto));
 	}
 }

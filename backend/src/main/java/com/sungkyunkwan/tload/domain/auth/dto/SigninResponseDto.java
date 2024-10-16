@@ -1,4 +1,4 @@
-package com.sungkyunkwan.tload.domain.user.dto;
+package com.sungkyunkwan.tload.domain.auth.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

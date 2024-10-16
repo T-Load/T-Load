@@ -1,12 +1,12 @@
-package com.sungkyunkwan.tload.domain.user.service;
+package com.sungkyunkwan.tload.domain.auth.service;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.sungkyunkwan.tload.domain.user.dto.SigninRequestDto;
-import com.sungkyunkwan.tload.domain.user.dto.SigninResponseDto;
-import com.sungkyunkwan.tload.domain.user.dto.SignupRequestDto;
-import com.sungkyunkwan.tload.domain.user.dto.SignupResponseDto;
+import com.sungkyunkwan.tload.domain.auth.dto.SigninRequestDto;
+import com.sungkyunkwan.tload.domain.auth.dto.SigninResponseDto;
+import com.sungkyunkwan.tload.domain.auth.dto.SignupRequestDto;
+import com.sungkyunkwan.tload.domain.auth.dto.SignupResponseDto;
 import com.sungkyunkwan.tload.domain.user.entity.User;
 import com.sungkyunkwan.tload.domain.user.entity.UserRoleEnum;
 import com.sungkyunkwan.tload.domain.user.repository.UserRepository;
@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class AuthService {
 
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;

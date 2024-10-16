@@ -5,9 +5,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sungkyunkwan.tload.domain.user.dto.UserInfoRequestDto;
 import com.sungkyunkwan.tload.domain.user.dto.UserResponseDto;
 import com.sungkyunkwan.tload.domain.user.service.UserService;
 import com.sungkyunkwan.tload.security.user.UserDetailsImpl;
@@ -26,6 +29,14 @@ public class UserController {
 		@AuthenticationPrincipal UserDetailsImpl userDetails,
 		@PathVariable Long userId) {
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(userService.getUser(userId));
+		return ResponseEntity.status(HttpStatus.OK).body(userService.getUser(userId));
+	}
+
+	@PutMapping("/profile")
+	public ResponseEntity<UserResponseDto> updateUser(
+		@AuthenticationPrincipal UserDetailsImpl userDetails,
+		@RequestBody UserInfoRequestDto userInfoRequestDto) {
+
+		return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(userDetails.getUser().getId(), userInfoRequestDto));
 	}
 }

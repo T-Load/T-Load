@@ -1,6 +1,7 @@
 package com.sungkyunkwan.tload.domain.user.entity;
 
 import com.sungkyunkwan.tload.domain.user.dto.UserInfoRequestDto;
+import com.sungkyunkwan.tload.domain.user.dto.UserPwRequestDto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -53,5 +54,9 @@ public class User {
 	public void updateUserInfo(UserInfoRequestDto userInfoRequestDto) {
 		this.nickname = userInfoRequestDto.getNickname();
 		this.intro = userInfoRequestDto.getIntro();
+	}
+
+	public void updatePassword(UserPwRequestDto userPwRequestDto) {
+		this.password = userPwRequestDto.getNewPassword();
 	}
 }

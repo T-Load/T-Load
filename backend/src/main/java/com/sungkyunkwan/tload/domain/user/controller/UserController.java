@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sungkyunkwan.tload.domain.user.dto.UserInfoRequestDto;
+import com.sungkyunkwan.tload.domain.user.dto.UserPwRequestDto;
 import com.sungkyunkwan.tload.domain.user.dto.UserResponseDto;
 import com.sungkyunkwan.tload.domain.user.service.UserService;
 import com.sungkyunkwan.tload.security.user.UserDetailsImpl;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -37,6 +39,17 @@ public class UserController {
 		@AuthenticationPrincipal UserDetailsImpl userDetails,
 		@RequestBody UserInfoRequestDto userInfoRequestDto) {
 
-		return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(userDetails.getUser().getId(), userInfoRequestDto));
+		return ResponseEntity.status(HttpStatus.OK)
+			.body(userService.updateUser(userDetails.getUser().getId(), userInfoRequestDto));
+	}
+
+	@PutMapping("/password")
+	public ResponseEntity<String> updatePassword(
+		@AuthenticationPrincipal UserDetailsImpl userDetails,
+		@RequestBody @Valid UserPwRequestDto userPwRequestDto) {
+
+		userService.updatePassword(userDetails.getUser().getId(), userPwRequestDto);
+
+		return ResponseEntity.status(HttpStatus.OK).body("비밀번호 수정에 성공하였습니다.");
 	}
 }

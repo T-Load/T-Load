@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  line-height: 1;
+  font-size: 1.6rem;
+  font-family: "DMSans", "Inter", sans-serif;
+  background-color: #fafafa;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #000000;
+}
+
+a {
+  color: #76a5ea;
+  text-decoration: none;
+}
+
+button,
+textarea {
+  all: unset;
+}
+
+@layer components {
+  .btn-common {
+    @apply w-[36px] h-[36px] text-center border bg-white cursor-pointer rounded-lg transition-transform duration-300 ease-in-out;
+  }
+
+  .btn-hover:hover {
+    @apply transform scale-97 shadow-lg;
+  }
+
+  .nav-item {
+    @apply flex items-center text-white mb-4;
+  }
+
+  .nav-item-icon {
+    @apply min-w-[3rem] text-center;
+  }
+
+  .space-y-6 {
+    @apply space-y-6;
+  }
+}

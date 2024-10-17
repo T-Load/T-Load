@@ -1,11 +1,9 @@
+import { AuthInputProps } from "constant/AuthInputProps";
 import { Toast } from "primereact/toast";
-// eslint-disable-next-line import/order
 import { useState, useRef, useEffect } from "react";
 
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
-// eslint-disable-next-line import/order
-import { AuthInputProps } from "constant/AuthInputProps";
 
 export default function AuthInput({ label, name, type, placeholder, value, onChange }: AuthInputProps) {
   const [error, setError] = useState("");

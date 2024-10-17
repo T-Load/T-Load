@@ -1,4 +1,4 @@
-package com.sungkyunkwan.tload.domain.user.dto;
+package com.sungkyunkwan.tload.domain.auth.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

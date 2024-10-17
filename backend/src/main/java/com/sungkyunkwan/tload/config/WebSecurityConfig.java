@@ -1,4 +1,4 @@
-package com.sungkyunkwan.tload.security.config;
+package com.sungkyunkwan.tload.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -56,6 +56,7 @@ public class WebSecurityConfig {
 		http.authorizeHttpRequests(authorize ->
 			authorize
 				.requestMatchers("/api/auth/**").permitAll()
+				.requestMatchers("/swagger-ui/**", "/v3/**").permitAll()
 				.anyRequest().authenticated()
 		);
 

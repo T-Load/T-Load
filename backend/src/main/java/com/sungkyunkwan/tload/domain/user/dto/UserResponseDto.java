@@ -5,17 +5,17 @@ import com.sungkyunkwan.tload.domain.user.entity.User;
 import lombok.Getter;
 
 @Getter
-public class SignupResponseDto {
+public class UserResponseDto {
 
 	private final Long id;
-	private final String email;
 	private final String nickname;
+	private final String email;
 	private final String intro;
 
-	public SignupResponseDto(User user) {
+	public UserResponseDto(User user) {
 		this.id = user.getId();
-		this.email = user.getEmail();
 		this.nickname = user.getNickname();
+		this.email = user.getEmail();
 		this.intro = user.getIntro();
 	}
 }

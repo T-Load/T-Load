@@ -3,14 +3,11 @@ package com.sungkyunkwan.tload.domain.user.service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.sungkyunkwan.tload.domain.user.dto.SigninRequestDto;
-import com.sungkyunkwan.tload.domain.user.dto.SigninResponseDto;
-import com.sungkyunkwan.tload.domain.user.dto.SignupRequestDto;
-import com.sungkyunkwan.tload.domain.user.dto.SignupResponseDto;
+import com.sungkyunkwan.tload.domain.user.dto.UserInfoRequestDto;
+import com.sungkyunkwan.tload.domain.user.dto.UserPwRequestDto;
+import com.sungkyunkwan.tload.domain.user.dto.UserResponseDto;
 import com.sungkyunkwan.tload.domain.user.entity.User;
-import com.sungkyunkwan.tload.domain.user.entity.UserRoleEnum;
 import com.sungkyunkwan.tload.domain.user.repository.UserRepository;
-import com.sungkyunkwan.tload.security.jwt.JwtUtil;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,41 +17,39 @@ public class UserService {
 
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
-	private final JwtUtil jwtUtil;
 
-	public SignupResponseDto signup(SignupRequestDto signupRequestDto) {
-		if (userRepository.existsByEmail(signupRequestDto.getEmail())) {
-			throw new IllegalArgumentException("이미 존재하는 이메일입니다.");
-		}
+	public UserResponseDto getUser(Long userId) {
+		User user = findById(userId);
 
-		if (userRepository.existsByNickname(signupRequestDto.getNickname())) {
-			throw new IllegalArgumentException("이미 존재하는 닉네임입니다.");
-		}
-
-		User user = User.builder()
-			.email(signupRequestDto.getEmail())
-			.password(passwordEncoder.encode(signupRequestDto.getPassword()))
-			.nickname(signupRequestDto.getNickname())
-			.intro(signupRequestDto.getIntro())
-			.role(UserRoleEnum.USER)
-			.build();
-
-		userRepository.save(user);
-
-		return new SignupResponseDto(user);
+		return new UserResponseDto(user);
 	}
 
-	public SigninResponseDto login(SigninRequestDto signinRequestDto) {
-		User user = userRepository.findByEmail(signinRequestDto.getEmail())
-			.orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
+	public UserResponseDto updateUser(Long userId, UserInfoRequestDto userInfoRequestDto) {
+		User user = findById(userId);
 
-		if (!passwordEncoder.matches(signinRequestDto.getPassword(), user.getPassword())) {
-			throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+		user.updateUserInfo(userInfoRequestDto);
+		userRepository.save(user);
+
+		return new UserResponseDto(user);
+	}
+
+	public void updatePassword(Long id, UserPwRequestDto userPwRequestDto) {
+		User user = findById(id);
+
+		if (!passwordEncoder.matches(userPwRequestDto.getCurrentPassword(), user.getPassword())) {
+			throw new IllegalArgumentException("현재 비밀번호가 일치하지 않습니다.");
 		}
 
-		String accessToken = jwtUtil.createAccessToken(user);
-		String refreshToken = jwtUtil.createRefreshToken();
+		if (passwordEncoder.matches(userPwRequestDto.getNewPassword(), user.getPassword())) {
+			throw new IllegalArgumentException("새로운 비밀번호가 현재 비밀번호와 동일합니다.");
+		}
 
-		return new SigninResponseDto(accessToken, refreshToken);
+		user.updatePassword(userPwRequestDto);
+		userRepository.save(user);
+	}
+
+	private User findById(Long userId) {
+		return userRepository.findById(userId)
+			.orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
 	}
 }

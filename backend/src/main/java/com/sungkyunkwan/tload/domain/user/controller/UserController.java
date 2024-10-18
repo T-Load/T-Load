@@ -31,7 +31,8 @@ public class UserController {
 		@AuthenticationPrincipal UserDetailsImpl userDetails,
 		@PathVariable Long userId) {
 
-		return ResponseEntity.status(HttpStatus.OK).body(userService.getUser(userId));
+		return ResponseEntity.status(HttpStatus.OK)
+			.body(userService.getUser(userId));
 	}
 
 	@PutMapping("/profile")
@@ -50,6 +51,7 @@ public class UserController {
 
 		userService.updatePassword(userDetails.getUser().getId(), userPwRequestDto);
 
-		return ResponseEntity.status(HttpStatus.OK).body("비밀번호 수정에 성공하였습니다.");
+		return ResponseEntity.status(HttpStatus.OK)
+			.body("비밀번호 수정에 성공하였습니다.");
 	}
 }

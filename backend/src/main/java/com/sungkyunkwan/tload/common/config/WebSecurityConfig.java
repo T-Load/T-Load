@@ -1,4 +1,4 @@
-package com.sungkyunkwan.tload.config;
+package com.sungkyunkwan.tload.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

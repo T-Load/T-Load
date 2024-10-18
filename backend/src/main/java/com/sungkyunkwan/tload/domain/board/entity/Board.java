@@ -1,5 +1,7 @@
 package com.sungkyunkwan.tload.domain.board.entity;
 
+import com.sungkyunkwan.tload.common.util.Timestamped;
+import com.sungkyunkwan.tload.domain.board.dto.BoardRequestDto;
 import com.sungkyunkwan.tload.domain.user.entity.User;
 
 import jakarta.persistence.Column;
@@ -18,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Table(name = "boards")
-public class Board {
+public class Board extends Timestamped {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,8 +43,8 @@ public class Board {
 		this.user = user;
 	}
 
-	public void updateBoard(Board board) {
-		this.title = board.getTitle();
-		this.contents = board.getContents();
+	public void updateBoard(BoardRequestDto boardRequestDto) {
+		this.title = boardRequestDto.getTitle();
+		this.contents = boardRequestDto.getContents();
 	}
 }

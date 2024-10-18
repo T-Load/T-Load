@@ -1,4 +1,4 @@
-package com.sungkyunkwan.tload.config;
+package com.sungkyunkwan.tload.common.config;
 
 import java.util.Arrays;
 import java.util.Collections;

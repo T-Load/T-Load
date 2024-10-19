@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sungkyunkwan.tload.common.dto.CommonDto;
 import com.sungkyunkwan.tload.domain.board.dto.BoardRequestDto;
 import com.sungkyunkwan.tload.domain.board.dto.BoardResponseDto;
 import com.sungkyunkwan.tload.domain.board.service.BoardService;
@@ -29,50 +30,60 @@ public class BoardController {
 	private final BoardService boardService;
 
 	@PostMapping
-	public ResponseEntity<BoardResponseDto> createBoard(
+	public ResponseEntity<CommonDto<BoardResponseDto>> createBoard(
 		@AuthenticationPrincipal UserDetailsImpl userDetails,
 		@RequestBody BoardRequestDto boardRequestDto) {
 
 		return ResponseEntity.status(HttpStatus.CREATED)
-			.body(boardService.createBoard(userDetails.getUser(), boardRequestDto));
+			.body(new CommonDto<BoardResponseDto>(HttpStatus.CREATED.value()
+				, "게시물 생성에 성공하였습니다."
+				, boardService.createBoard(userDetails.getUser(), boardRequestDto)));
 	}
 
 	@GetMapping("/{boardId}")
-	public ResponseEntity<BoardResponseDto> getBoard(
+	public ResponseEntity<CommonDto<BoardResponseDto>> getBoard(
 		@AuthenticationPrincipal UserDetailsImpl userDetails,
 		@PathVariable Long boardId) {
 
 		return ResponseEntity.status(HttpStatus.OK)
-			.body(boardService.getBoard(boardId));
+			.body(new CommonDto<BoardResponseDto>(HttpStatus.OK.value()
+				, "게시물 조회에 성공하였습니다."
+				, boardService.getBoard(boardId)));
 	}
 
 	@GetMapping
-	public ResponseEntity<Page<BoardResponseDto>>  getBoards(
+	public ResponseEntity<CommonDto<Page<BoardResponseDto>>>  getBoards(
 		@AuthenticationPrincipal UserDetailsImpl userDetails,
 		@RequestParam(defaultValue = "0") int page) {
 
 		return ResponseEntity.status(HttpStatus.OK)
-			.body(boardService.getBoards(page));
+			.body(new CommonDto<Page<BoardResponseDto>>(HttpStatus.OK.value()
+				, "게시물 조회에 성공하였습니다."
+				, boardService.getBoards(page)));
 	}
 
 	@PutMapping("/{boardId}")
-	public ResponseEntity<BoardResponseDto> updateBoard(
+	public ResponseEntity<CommonDto<BoardResponseDto>> updateBoard(
 		@AuthenticationPrincipal UserDetailsImpl userDetails,
 		@PathVariable Long boardId,
 		@RequestBody BoardRequestDto boardRequestDto) {
 
 		return ResponseEntity.status(HttpStatus.OK)
-			.body(boardService.updateBoard(userDetails.getUser().getId(), boardId, boardRequestDto));
+			.body(new CommonDto<BoardResponseDto>(HttpStatus.OK.value()
+				, "게시물 수정에 성공하였습니다."
+				, boardService.updateBoard(userDetails.getUser().getId(), boardId, boardRequestDto)));
 	}
 
 	@DeleteMapping("/{boardId}")
-	public ResponseEntity<String> deleteBoard(
+	public ResponseEntity<CommonDto<Void>> deleteBoard(
 		@AuthenticationPrincipal UserDetailsImpl userDetails,
 		@PathVariable Long boardId) {
 
 		boardService.deleteBoard(userDetails.getUser().getId(), boardId);
 
 		return ResponseEntity.status(HttpStatus.NO_CONTENT)
-			.body("게시물 삭제에 성공하였습니다.");
+			.body(new CommonDto<Void>(HttpStatus.NO_CONTENT.value()
+				, "게시물 삭제에 성공하였습니다."
+				, null));
 	}
 }

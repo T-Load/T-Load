@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sungkyunkwan.tload.common.dto.CommonDto;
+import com.sungkyunkwan.tload.domain.auth.dto.SigninResponseDto;
 import com.sungkyunkwan.tload.domain.user.dto.UserInfoRequestDto;
 import com.sungkyunkwan.tload.domain.user.dto.UserPwRequestDto;
 import com.sungkyunkwan.tload.domain.user.dto.UserResponseDto;
@@ -27,31 +29,37 @@ public class UserController {
 	private final UserService userService;
 
 	@GetMapping("/profile/{userId}")
-	public ResponseEntity<UserResponseDto> getUser(
+	public ResponseEntity<CommonDto<UserResponseDto>> getUser(
 		@AuthenticationPrincipal UserDetailsImpl userDetails,
 		@PathVariable Long userId) {
 
 		return ResponseEntity.status(HttpStatus.OK)
-			.body(userService.getUser(userId));
+			.body(new CommonDto<UserResponseDto>(HttpStatus.OK.value()
+				, "프로필 조회에 성공하였습니다."
+				, userService.getUser(userId)));
 	}
 
 	@PutMapping("/profile")
-	public ResponseEntity<UserResponseDto> updateUser(
+	public ResponseEntity<CommonDto<UserResponseDto>> updateUser(
 		@AuthenticationPrincipal UserDetailsImpl userDetails,
 		@RequestBody UserInfoRequestDto userInfoRequestDto) {
 
 		return ResponseEntity.status(HttpStatus.OK)
-			.body(userService.updateUser(userDetails.getUser().getId(), userInfoRequestDto));
+			.body(new CommonDto<UserResponseDto>(HttpStatus.OK.value()
+				, "프로필 수정에 성공하였습니다."
+				, userService.updateUser(userDetails.getUser().getId(), userInfoRequestDto)));
 	}
 
 	@PutMapping("/password")
-	public ResponseEntity<String> updatePassword(
+	public ResponseEntity<CommonDto<Void>> updatePassword(
 		@AuthenticationPrincipal UserDetailsImpl userDetails,
 		@RequestBody @Valid UserPwRequestDto userPwRequestDto) {
 
 		userService.updatePassword(userDetails.getUser().getId(), userPwRequestDto);
 
 		return ResponseEntity.status(HttpStatus.OK)
-			.body("비밀번호 수정에 성공하였습니다.");
+			.body(new CommonDto<Void>(HttpStatus.OK.value()
+				, "비밀번호 수정에 성공하였습니다."
+				, null));
 	}
 }

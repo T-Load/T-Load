@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sungkyunkwan.tload.common.dto.CommonDto;
 import com.sungkyunkwan.tload.domain.auth.dto.SigninRequestDto;
 import com.sungkyunkwan.tload.domain.auth.dto.SigninResponseDto;
 import com.sungkyunkwan.tload.domain.auth.dto.SignupRequestDto;
 import com.sungkyunkwan.tload.domain.auth.dto.SignupResponseDto;
 import com.sungkyunkwan.tload.domain.auth.service.AuthService;
+import com.sungkyunkwan.tload.domain.board.dto.BoardResponseDto;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -24,14 +26,20 @@ public class AuthController {
 	private final AuthService authService;
 
 	@PostMapping("/signup")
-	public ResponseEntity<SignupResponseDto> signup(@Valid @RequestBody SignupRequestDto signupRequestDto) {
+	public ResponseEntity<CommonDto<SignupResponseDto>> signup(@Valid @RequestBody SignupRequestDto signupRequestDto) {
+
 		return ResponseEntity.status(HttpStatus.CREATED)
-			.body(authService.signup(signupRequestDto));
+			.body(new CommonDto<SignupResponseDto>(HttpStatus.CREATED.value()
+				, "회원가입에 성공하였습니다."
+				, authService.signup(signupRequestDto)));
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<SigninResponseDto> login(@Valid @RequestBody SigninRequestDto signinRequestDto) {
-		return ResponseEntity.status(HttpStatus.CREATED)
-			.body(authService.login(signinRequestDto));
+	public ResponseEntity<CommonDto<SigninResponseDto>> login(@Valid @RequestBody SigninRequestDto signinRequestDto) {
+
+		return ResponseEntity.status(HttpStatus.OK)
+			.body(new CommonDto<SigninResponseDto>(HttpStatus.OK.value()
+				, "로그인에 성공하였습니다."
+				, authService.login(signinRequestDto)));
 	}
 }

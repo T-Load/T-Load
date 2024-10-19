@@ -28,7 +28,7 @@ public class AuthController {
 	@PostMapping("/signup")
 	public ResponseEntity<CommonDto<SignupResponseDto>> signup(@Valid @RequestBody SignupRequestDto signupRequestDto) {
 
-		return ResponseEntity.status(HttpStatus.CREATED)
+		return ResponseEntity.ok()
 			.body(new CommonDto<SignupResponseDto>(HttpStatus.CREATED.value()
 				, "회원가입에 성공하였습니다."
 				, authService.signup(signupRequestDto)));
@@ -37,7 +37,7 @@ public class AuthController {
 	@PostMapping("/login")
 	public ResponseEntity<CommonDto<SigninResponseDto>> login(@Valid @RequestBody SigninRequestDto signinRequestDto) {
 
-		return ResponseEntity.status(HttpStatus.OK)
+		return ResponseEntity.ok()
 			.body(new CommonDto<SigninResponseDto>(HttpStatus.OK.value()
 				, "로그인에 성공하였습니다."
 				, authService.login(signinRequestDto)));

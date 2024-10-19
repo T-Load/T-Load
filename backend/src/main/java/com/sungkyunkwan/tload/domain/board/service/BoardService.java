@@ -65,6 +65,15 @@ public class BoardService {
 		return new BoardResponseDto(board);
 	}
 
+	public void deleteBoard(Long id, Long boardId) {
+		if (!isBoardByUser(id, boardId)) {
+			throw new IllegalArgumentException("해당 게시물에 접근할 권한이 없습니다.");
+		}
+
+		Board board = findById(boardId);
+		boardRepository.delete(board);
+	}
+
 	private Boolean isBoardByUser(Long userId, Long boardId) {
 		return boardRepository.existsByIdAndUserId(boardId, userId);
 	}

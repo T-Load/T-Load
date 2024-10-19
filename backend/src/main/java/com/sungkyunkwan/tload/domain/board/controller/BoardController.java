@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/post")
+@RequestMapping("/api/board")
 public class BoardController {
 
 	private final BoardService boardService;
@@ -62,5 +63,16 @@ public class BoardController {
 
 		return ResponseEntity.status(HttpStatus.OK)
 			.body(boardService.updateBoard(userDetails.getUser().getId(), boardId, boardRequestDto));
+	}
+
+	@DeleteMapping("/{boardId}")
+	public ResponseEntity<String> deleteBoard(
+		@AuthenticationPrincipal UserDetailsImpl userDetails,
+		@PathVariable Long boardId) {
+
+		boardService.deleteBoard(userDetails.getUser().getId(), boardId);
+
+		return ResponseEntity.status(HttpStatus.NO_CONTENT)
+			.body("게시물 삭제에 성공하였습니다.");
 	}
 }

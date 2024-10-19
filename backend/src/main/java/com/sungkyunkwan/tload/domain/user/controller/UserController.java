@@ -33,7 +33,7 @@ public class UserController {
 		@AuthenticationPrincipal UserDetailsImpl userDetails,
 		@PathVariable Long userId) {
 
-		return ResponseEntity.status(HttpStatus.OK)
+		return ResponseEntity.ok()
 			.body(new CommonDto<UserResponseDto>(HttpStatus.OK.value()
 				, "프로필 조회에 성공하였습니다."
 				, userService.getUser(userId)));
@@ -44,7 +44,7 @@ public class UserController {
 		@AuthenticationPrincipal UserDetailsImpl userDetails,
 		@RequestBody UserInfoRequestDto userInfoRequestDto) {
 
-		return ResponseEntity.status(HttpStatus.OK)
+		return ResponseEntity.ok()
 			.body(new CommonDto<UserResponseDto>(HttpStatus.OK.value()
 				, "프로필 수정에 성공하였습니다."
 				, userService.updateUser(userDetails.getUser().getId(), userInfoRequestDto)));
@@ -57,8 +57,8 @@ public class UserController {
 
 		userService.updatePassword(userDetails.getUser().getId(), userPwRequestDto);
 
-		return ResponseEntity.status(HttpStatus.OK)
-			.body(new CommonDto<Void>(HttpStatus.OK.value()
+		return ResponseEntity.ok()
+			.body(new CommonDto<Void>(HttpStatus.NO_CONTENT.value()
 				, "비밀번호 수정에 성공하였습니다."
 				, null));
 	}

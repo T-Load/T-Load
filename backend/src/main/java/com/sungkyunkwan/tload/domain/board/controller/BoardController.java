@@ -34,7 +34,7 @@ public class BoardController {
 		@AuthenticationPrincipal UserDetailsImpl userDetails,
 		@RequestBody BoardRequestDto boardRequestDto) {
 
-		return ResponseEntity.status(HttpStatus.CREATED)
+		return ResponseEntity.ok()
 			.body(new CommonDto<BoardResponseDto>(HttpStatus.CREATED.value()
 				, "게시물 생성에 성공하였습니다."
 				, boardService.createBoard(userDetails.getUser(), boardRequestDto)));
@@ -45,7 +45,7 @@ public class BoardController {
 		@AuthenticationPrincipal UserDetailsImpl userDetails,
 		@PathVariable Long boardId) {
 
-		return ResponseEntity.status(HttpStatus.OK)
+		return ResponseEntity.ok()
 			.body(new CommonDto<BoardResponseDto>(HttpStatus.OK.value()
 				, "게시물 조회에 성공하였습니다."
 				, boardService.getBoard(boardId)));
@@ -56,7 +56,7 @@ public class BoardController {
 		@AuthenticationPrincipal UserDetailsImpl userDetails,
 		@RequestParam(defaultValue = "0") int page) {
 
-		return ResponseEntity.status(HttpStatus.OK)
+		return ResponseEntity.ok()
 			.body(new CommonDto<Page<BoardResponseDto>>(HttpStatus.OK.value()
 				, "게시물 조회에 성공하였습니다."
 				, boardService.getBoards(page)));
@@ -68,7 +68,7 @@ public class BoardController {
 		@PathVariable Long boardId,
 		@RequestBody BoardRequestDto boardRequestDto) {
 
-		return ResponseEntity.status(HttpStatus.OK)
+		return ResponseEntity.ok()
 			.body(new CommonDto<BoardResponseDto>(HttpStatus.OK.value()
 				, "게시물 수정에 성공하였습니다."
 				, boardService.updateBoard(userDetails.getUser().getId(), boardId, boardRequestDto)));
@@ -81,7 +81,7 @@ public class BoardController {
 
 		boardService.deleteBoard(userDetails.getUser().getId(), boardId);
 
-		return ResponseEntity.status(HttpStatus.NO_CONTENT)
+		return ResponseEntity.ok()
 			.body(new CommonDto<Void>(HttpStatus.NO_CONTENT.value()
 				, "게시물 삭제에 성공하였습니다."
 				, null));

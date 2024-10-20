@@ -38,21 +38,25 @@ export default function SignUpForm() {
     <div className="flex flex-col items-center justify-center h-screen">
       <form
         onSubmit={handleSignIn}
-        className="flex flex-col w-[300px] h-fit gap-6 px-6 py-3 border bg-white border-gray-300 rounded-xl shadow-md">
+        className="flex flex-col w-[300px] h-fit gap-6 px-6 py-3 border bg-white border-gray-300 rounded-xl shadow-md pt-8">
         <Link href="/" className="flex justify-center mb-3">
           <Image
             src="/image/Main_Logo.webp"
             width={220}
             height={220}
             alt="아파모아"
-            className="border-4 border-green-500 p-4 rounded-3xl mt-2"
+            className="border-4 p-4 rounded-xl border-green-600"
           />
         </Link>
         <AuthInput {...emailProps} />
         <AuthInput {...passwordProps} />
+        {/* <button className="glowing-border text-glow bg-black text-white p-4 rounded-lg hover:bg-gray-500">
+          Sign Up
+        </button> */}
+
         <button
           type="submit"
-          className="bg-pink-500 text-white flex justify-center py-5 mt-2 mb-2 px-4 rounded-md hover:bg-pink-700 transition-colors">
+          className="bg-green-500 text-white flex justify-center py-5 mt-2 mb-2 px-4 rounded-md hover:bg-green-700 transition-colors">
           로그인
         </button>
       </form>

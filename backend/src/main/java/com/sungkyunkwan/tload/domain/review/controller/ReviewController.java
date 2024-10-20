@@ -7,6 +7,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,5 +59,17 @@ public class ReviewController {
 			.body(new CommonDto<Page<ReviewResponseDto>>(HttpStatus.OK.value()
 				, "후기 조회에 성공하였습니다."
 				, reviewService.getReviews(page)));
+	}
+
+	@PutMapping("/{reviewId")
+	public ResponseEntity<CommonDto<ReviewResponseDto>> updateReview(
+		@AuthenticationPrincipal UserDetailsImpl userDetails,
+		@PathVariable Long reviewId,
+		@RequestBody ReviewRequestDto reviewRequestDto) {
+
+		return ResponseEntity.ok()
+			.body(new CommonDto<ReviewResponseDto>(HttpStatus.OK.value()
+				, "후기 수정에 성공하였습니다."
+				, reviewService.updateReview(userDetails.getUser().getId(), reviewId, reviewRequestDto)));
 	}
 }

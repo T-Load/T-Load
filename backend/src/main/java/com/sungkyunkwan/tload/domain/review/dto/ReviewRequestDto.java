@@ -6,6 +6,6 @@ import lombok.Getter;
 public class ReviewRequestDto {
 
 	private String title;
-	private String content;
+	private String contents;
 	private int rating;
 }

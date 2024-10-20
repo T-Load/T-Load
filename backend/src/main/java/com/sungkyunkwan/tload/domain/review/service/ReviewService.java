@@ -26,7 +26,7 @@ public class ReviewService {
 	public ReviewResponseDto createReview(User user, ReviewRequestDto reviewRequestDto) {
 		Review review = Review.builder()
 			.title(reviewRequestDto.getTitle())
-			.contents(reviewRequestDto.getContent())
+			.contents(reviewRequestDto.getContents())
 			.rating(reviewRequestDto.getRating())
 			.user(user)
 			.build();
@@ -48,6 +48,22 @@ public class ReviewService {
 			.toList();
 
 		return new PageImpl<>(reviewResponseDtos, pageable, reviews.getTotalElements());
+	}
+
+	public ReviewResponseDto updateReview(Long id, Long reviewId, ReviewRequestDto reviewRequestDto) {
+		if (!isReviewByUser(id, reviewId)) {
+			throw new IllegalArgumentException("해당 후기에 접근할 권한이 없습니다.");
+		}
+
+		Review review = findById(reviewId);
+		review.updateReview(reviewRequestDto);
+		reviewRepository.save(review);
+
+		return new ReviewResponseDto(review);
+	}
+
+	private Boolean isReviewByUser(Long userId, Long reviewId) {
+		return reviewRepository.existsByIdAndUser_Id(reviewId, userId);
 	}
 
 	private Review findById(Long reviewId) {

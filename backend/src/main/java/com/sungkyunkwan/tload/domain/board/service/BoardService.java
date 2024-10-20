@@ -72,7 +72,7 @@ public class BoardService {
 	}
 
 	private Boolean isBoardByUser(Long userId, Long boardId) {
-		return boardRepository.existsByIdAndUserId(boardId, userId);
+		return boardRepository.existsByIdAndUser_Id(boardId, userId);
 	}
 
 	private Board findById(Long boardId) {

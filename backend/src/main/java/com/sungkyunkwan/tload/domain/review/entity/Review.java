@@ -1,6 +1,7 @@
 package com.sungkyunkwan.tload.domain.review.entity;
 
 import com.sungkyunkwan.tload.common.util.Timestamped;
+import com.sungkyunkwan.tload.domain.review.dto.ReviewRequestDto;
 import com.sungkyunkwan.tload.domain.user.entity.User;
 
 import jakarta.persistence.Column;
@@ -44,5 +45,11 @@ public class Review extends Timestamped {
 		this.contents = contents;
 		this.rating = rating;
 		this.user = user;
+	}
+
+	public void updateReview(ReviewRequestDto reviewRequestDto) {
+		this.title = reviewRequestDto.getTitle();
+		this.contents = reviewRequestDto.getContents();
+		this.rating = reviewRequestDto.getRating();
 	}
 }

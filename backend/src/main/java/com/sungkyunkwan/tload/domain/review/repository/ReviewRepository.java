@@ -9,4 +9,5 @@ import com.sungkyunkwan.tload.domain.review.entity.Review;
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
 	Page<Review> findAllByOrderByCreatedAtDesc(Pageable pageable);
+	Boolean existsByIdAndUser_Id(Long reviewId, Long userId);
 }

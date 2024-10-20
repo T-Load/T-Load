@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sungkyunkwan.tload.common.dto.CommonDto;
-import com.sungkyunkwan.tload.domain.auth.dto.SigninResponseDto;
 import com.sungkyunkwan.tload.domain.user.dto.UserInfoRequestDto;
 import com.sungkyunkwan.tload.domain.user.dto.UserPwRequestDto;
 import com.sungkyunkwan.tload.domain.user.dto.UserResponseDto;

@@ -62,6 +62,15 @@ public class ReviewService {
 		return new ReviewResponseDto(review);
 	}
 
+	public void deleteReview(Long id, Long reviewId) {
+		if (!isReviewByUser(id, reviewId)) {
+			throw new IllegalArgumentException("해당 후기에 접근할 권한이 없습니다.");
+		}
+
+		Review review = findById(reviewId);
+		reviewRepository.delete(review);
+	}
+
 	private Boolean isReviewByUser(Long userId, Long reviewId) {
 		return reviewRepository.existsByIdAndUser_Id(reviewId, userId);
 	}

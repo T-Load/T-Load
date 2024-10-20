@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,7 +62,7 @@ public class ReviewController {
 				, reviewService.getReviews(page)));
 	}
 
-	@PutMapping("/{reviewId")
+	@PutMapping("/{reviewId}")
 	public ResponseEntity<CommonDto<ReviewResponseDto>> updateReview(
 		@AuthenticationPrincipal UserDetailsImpl userDetails,
 		@PathVariable Long reviewId,
@@ -71,5 +72,18 @@ public class ReviewController {
 			.body(new CommonDto<ReviewResponseDto>(HttpStatus.OK.value()
 				, "후기 수정에 성공하였습니다."
 				, reviewService.updateReview(userDetails.getUser().getId(), reviewId, reviewRequestDto)));
+	}
+
+	@DeleteMapping("/{reviewId}")
+	public ResponseEntity<CommonDto<Void>> deleteReview(
+		@AuthenticationPrincipal UserDetailsImpl userDetails,
+		@PathVariable Long reviewId) {
+
+		reviewService.deleteReview(userDetails.getUser().getId(), reviewId);
+
+		return ResponseEntity.ok()
+			.body(new CommonDto<Void>(HttpStatus.NO_CONTENT.value()
+				, "후기 삭제에 성공하였습니다."
+				, null));
 	}
 }

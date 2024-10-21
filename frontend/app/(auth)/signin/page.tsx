@@ -11,7 +11,7 @@ export default function SignUpForm() {
   const [password, setPassword] = useState("");
 
   const emailProps: AuthInputProps = {
-    label: "이메일",
+    label: "Email",
     name: "email",
     type: "email",
     placeholder: "이메일을 입력하세요",
@@ -20,7 +20,7 @@ export default function SignUpForm() {
   };
 
   const passwordProps: AuthInputProps = {
-    label: "비밀번호",
+    label: "Password",
     name: "password",
     type: "password",
     placeholder: "비밀번호를 입력하세요",
@@ -50,15 +50,17 @@ export default function SignUpForm() {
         </Link>
         <AuthInput {...emailProps} />
         <AuthInput {...passwordProps} />
-        {/* <button className="glowing-border text-glow bg-black text-white p-4 rounded-lg hover:bg-gray-500">
-          Sign Up
-        </button> */}
-
         <button
           type="submit"
           className="bg-green-500 text-white flex justify-center py-5 mt-2 mb-2 px-4 rounded-md hover:bg-green-700 transition-colors">
           로그인
         </button>
+        <div className="flex gap-3 justify-center mb-4">
+          <span className="font-poppins text-xl">아이디가 없으신가요?</span>
+          <Link href="/signup">
+            <p className="text-xl font-roboto font-bold">Trip to signUp</p>
+          </Link>
+        </div>
       </form>
     </div>
   );

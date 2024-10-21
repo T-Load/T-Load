@@ -91,3 +91,35 @@ textarea {
     border-color: rgba(128, 0, 128, 0.4);
   }
 }
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('/fonts/Roboto-Regular.woff2?v=1') format('woff2'),
+       url('/fonts/Roboto-Regular.woff?v=1') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('/fonts/Roboto-Bold.woff2?v=1') format('woff2'),
+       url('/fonts/Roboto-Bold.woff?v=1') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins-Regular.woff2?v=1') format('woff2'),
+       url('/fonts/Poppins-Regular.woff?v=1') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins-Bold.woff2') format('woff2'),
+       url('/fonts/Poppins-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}

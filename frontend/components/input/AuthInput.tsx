@@ -66,7 +66,7 @@ export default function AuthInput({ label, name, type, placeholder, value, onCha
     <>
       <Toast ref={toast} position="top-center" />
       <div className="flex flex-col gap-2">
-        <label htmlFor={name} className="text-[14px]">
+        <label htmlFor={name} className="text-[14px] font-poppins font-bold">
           {label}
         </label>
         <input

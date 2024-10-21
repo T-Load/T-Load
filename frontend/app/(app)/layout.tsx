@@ -5,10 +5,10 @@ import { ReactNode } from "react";
 export default function EditLayout({ children }: { children: ReactNode }) {
   return (
     <div className="flex flex-col min-h-screen">
-      <GNB isEdit={true} />
+      <GNB haveCookie={false} />
       <div className="flex flex-1">
+        <div className="w-[70px] bg-green-300">난 사이드바!</div>
         <div className="flex-1">{children}</div>
-        <div className="w-[70px] bg-pink-300">난 사이드바!</div>
       </div>
       <div>난 푸터입니다</div>
     </div>

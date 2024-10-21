@@ -1,10 +1,9 @@
-const GNB = ({ isEdit }: { isEdit: boolean }) => {
+import GuestHeader from "./header/GuestHeader";
+
+const GNB = ({ haveCookie }: { haveCookie: boolean }) => {
   return (
     <>
-      <div className="bg-green-500 h-[70px]">
-        {isEdit ? <div>어우 나 지금 편집중</div> : ""}
-        <div>나 GNB야!</div>
-      </div>
+      <div>{haveCookie ? <div>어우 나 지금 편집중</div> : <GuestHeader />}</div>
     </>
   );
 };

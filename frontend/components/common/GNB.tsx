@@ -1,11 +1,8 @@
 import GuestHeader from "./header/GuestHeader";
+import UserHeader from "./header/UserHeader";
 
 const GNB = ({ haveCookie }: { haveCookie: boolean }) => {
-  return (
-    <>
-      <div>{haveCookie ? <div>어우 나 지금 편집중</div> : <GuestHeader />}</div>
-    </>
-  );
+  return <>{haveCookie ? <UserHeader /> : <GuestHeader />}</>;
 };
 
 export default GNB;

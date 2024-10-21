@@ -1,5 +1,7 @@
 package com.sungkyunkwan.tload.domain.review.controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,14 +54,14 @@ public class ReviewController {
 	}
 
 	@GetMapping
-	public ResponseEntity<CommonDto<Page<ReviewResponseDto>>>  getReviews(
+	public ResponseEntity<CommonDto<List<ReviewResponseDto>>>  getReviews(
 		@AuthenticationPrincipal UserDetailsImpl userDetails,
 		@RequestParam(defaultValue = "0") int page) {
 
 		return ResponseEntity.ok()
-			.body(new CommonDto<Page<ReviewResponseDto>>(HttpStatus.OK.value()
+			.body(new CommonDto<List<ReviewResponseDto>>(HttpStatus.OK.value()
 				, "후기 조회에 성공하였습니다."
-				, reviewService.getReviews(page)));
+				, reviewService.getReviews(page).getContent()));
 	}
 
 	@PutMapping("/{reviewId}")

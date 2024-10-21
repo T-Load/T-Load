@@ -1,5 +1,7 @@
 package com.sungkyunkwan.tload.domain.board.controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,14 +54,14 @@ public class BoardController {
 	}
 
 	@GetMapping
-	public ResponseEntity<CommonDto<Page<BoardResponseDto>>>  getBoards(
+	public ResponseEntity<CommonDto<List<BoardResponseDto>>>  getBoards(
 		@AuthenticationPrincipal UserDetailsImpl userDetails,
 		@RequestParam(defaultValue = "0") int page) {
 
 		return ResponseEntity.ok()
-			.body(new CommonDto<Page<BoardResponseDto>>(HttpStatus.OK.value()
+			.body(new CommonDto<List<BoardResponseDto>>(HttpStatus.OK.value()
 				, "게시물 조회에 성공하였습니다."
-				, boardService.getBoards(page)));
+				, boardService.getBoards(page).getContent()));
 	}
 
 	@PutMapping("/{boardId}")

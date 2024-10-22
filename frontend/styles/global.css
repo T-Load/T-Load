@@ -33,6 +33,26 @@ textarea {
 }
 
 @layer components {
+  .glowing-border {
+    border-radius: 20px; 
+    box-shadow: 0 0 20px 10px rgba(228, 88, 228, 0.8), 
+                0 0 50px 20px rgba(128, 0, 255, 0.4);
+    border: 2px solid rgba(255, 149, 255, 0.6);
+  }
+
+  .text-glow {
+    color: #fff;
+    text-shadow: 
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 42px #0fa,
+      0 0 82px #0fa,
+      0 0 92px #0fa,
+      0 0 102px #0fa,
+      0 0 151px #0fa;
+  }
+
   .btn-common {
     @apply w-[36px] h-[36px] text-center border bg-white cursor-pointer rounded-lg transition-transform duration-300 ease-in-out;
   }
@@ -52,4 +72,54 @@ textarea {
   .space-y-6 {
     @apply space-y-6;
   }
+}
+
+@keyframes neonGlow {
+  0% {
+    box-shadow: 0 0 10px 5px rgba(128, 0, 128, 0.6), 
+                0 0 30px 15px rgba(128, 0, 255, 0.3);
+    border-color: rgba(128, 0, 128, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px 10px rgba(128, 0, 128, 0.8), 
+                0 0 50px 25px rgba(128, 0, 255, 0.5);
+    border-color: rgba(128, 0, 128, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 10px 5px rgba(128, 0, 128, 0.6), 
+                0 0 30px 15px rgba(128, 0, 255, 0.3);
+    border-color: rgba(128, 0, 128, 0.4);
+  }
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('/fonts/Roboto-Regular.woff2?v=1') format('woff2'),
+       url('/fonts/Roboto-Regular.woff?v=1') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('/fonts/Roboto-Bold.woff2?v=1') format('woff2'),
+       url('/fonts/Roboto-Bold.woff?v=1') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins-Regular.woff2?v=1') format('woff2'),
+       url('/fonts/Poppins-Regular.woff?v=1') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins-Bold.woff2') format('woff2'),
+       url('/fonts/Poppins-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
 }

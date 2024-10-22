@@ -44,7 +44,7 @@ public class UserService {
 			throw new IllegalArgumentException("새로운 비밀번호가 현재 비밀번호와 동일합니다.");
 		}
 
-		user.updatePassword(userPwRequestDto);
+		user.updatePassword(passwordEncoder.encode(userPwRequestDto.getNewPassword()));
 		userRepository.save(user);
 	}
 

@@ -56,7 +56,7 @@ public class User {
 		this.intro = userInfoRequestDto.getIntro();
 	}
 
-	public void updatePassword(UserPwRequestDto userPwRequestDto) {
-		this.password = userPwRequestDto.getNewPassword();
+	public void updatePassword(String password) {
+		this.password = password;
 	}
 }

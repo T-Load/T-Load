@@ -5,4 +5,6 @@ export interface AuthInputProps {
   placeholder: string;
   value: string;
   onChange: (value: string) => void;
+  isConfirmPassword?: boolean;
+  originalPassword?: string;
 }

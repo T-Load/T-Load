@@ -54,7 +54,7 @@ textarea {
   }
 
   .btn-common {
-    @apply w-[36px] h-[36px] text-center border bg-white cursor-pointer rounded-lg transition-transform duration-300 ease-in-out;
+    @apply p-3 text-center border bg-white cursor-pointer rounded-lg transition-transform duration-300 ease-in-out;
   }
 
   .btn-hover:hover {

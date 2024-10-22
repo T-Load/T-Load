@@ -95,7 +95,7 @@ export default function AuthInput({
           value={inputValue}
           onChange={handleChange}
           onBlur={handleBlur}
-          className="w-full px-4 py-3 border border-gray-400 rounded-md focus:outline-none focus:ring-0 focus:border-pink-400 focus:shadow-pink-400 focus:shadow-sm"
+          className="flex w-full px-4 py-3 border border-gray-400 rounded-md focus:outline-none focus:ring-0 focus:border-pink-400 focus:shadow-pink-400 focus:shadow-sm placeholder:font-roboto placeholder:text-xl"
         />
         {error && <p className="text-red-500 text-sm">{error}</p>}
       </div>

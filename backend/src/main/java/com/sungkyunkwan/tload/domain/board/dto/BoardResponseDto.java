@@ -13,13 +13,13 @@ public class BoardResponseDto {
 	private final String title;
 	private final String contents;
 	private final LocalDateTime createdAt;
-	private final LocalDateTime modifiedAt;
+	private final LocalDateTime updatedAt;
 
 	public BoardResponseDto(Board board) {
 		this.id = board.getId();
 		this.title = board.getTitle();
 		this.contents = board.getContents();
-		this.createdAt = LocalDateTime.now();
-		this.modifiedAt = LocalDateTime.now();
+		this.createdAt = board.getCreatedAt();
+		this.updatedAt = board.getUpdatedAt();
 	}
 }

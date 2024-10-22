@@ -37,10 +37,7 @@ public class BoardService {
 	}
 
 	public BoardResponseDto getBoard(Long boardId) {
-		Board board = boardRepository.findById(boardId)
-			.orElseThrow(() -> new IllegalArgumentException("해당 게시물을 찾을 수 없습니다."));
-
-		return new BoardResponseDto(board);
+		return new BoardResponseDto(findById(boardId));
 	}
 
 	public Page<BoardResponseDto> getBoards(int page) {
@@ -75,11 +72,11 @@ public class BoardService {
 	}
 
 	private Boolean isBoardByUser(Long userId, Long boardId) {
-		return boardRepository.existsByIdAndUserId(boardId, userId);
+		return boardRepository.existsByIdAndUser_Id(boardId, userId);
 	}
 
 	private Board findById(Long boardId) {
 		return boardRepository.findById(boardId)
-			.orElseThrow(() -> new IllegalArgumentException("해당 게시물이 존재하지 않습니다."));
+			.orElseThrow(() -> new IllegalArgumentException("해당 게시물을 찾을 수 없습니다."));
 	}
 }

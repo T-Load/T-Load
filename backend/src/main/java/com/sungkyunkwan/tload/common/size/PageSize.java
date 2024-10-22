@@ -1,7 +1,8 @@
 package com.sungkyunkwan.tload.common.size;
 
 public enum PageSize {
-	BOARD(10);
+	BOARD(10),
+	REVIEW(20);
 
 	private final int size;
 

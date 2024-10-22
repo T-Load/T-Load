@@ -9,5 +9,5 @@ import com.sungkyunkwan.tload.domain.board.entity.Board;
 public interface BoardRepository extends JpaRepository<Board, Long> {
 
 	Page<Board> findAllByOrderByCreatedAtDesc(Pageable pageable);
-	Boolean existsByIdAndUserId(Long userId, Long boardId);
+	Boolean existsByIdAndUser_Id(Long boardId, Long userId);
 }

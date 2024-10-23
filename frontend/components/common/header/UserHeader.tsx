@@ -16,7 +16,7 @@ const UserHeader = () => {
         {/** 이건 로고 */}
         <div className="flex items-center gap-6">
           <div className="relative w-14 h-14 overflow-hidden rounded-full border-2 border-white shadow-lg">
-            <Image src="/image/Main_Logo.webp" layout="fill" objectFit="cover" alt="로고" />
+            <Image src="/image/Main_Logo.webp" width={56} height={56} className="object-cover" alt="로고" />
           </div>
           <span className="text-black font-bold text-4xl drop-shadow-lg font-roboto">T-Load</span>
         </div>

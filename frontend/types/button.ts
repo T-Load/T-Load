@@ -10,8 +10,12 @@ export const buttonSize: {
   "3xl": "h-[72px] text-[22px] font-bold rounded-[20px] px-[24px] py-[20px]",
 };
 
+export type buttonSizeType = "xs" | "s" | "m" | "l" | "xl" | "2xl" | "3xl";
+
 export const buttonColor: {
   [color: string]: string;
 } = {
   primary: "bg-green-500 text-white hover:bg-green-700",
 };
+
+export type buttonColorType = "primary";

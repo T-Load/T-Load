@@ -29,7 +29,7 @@ const MainInfo = () => {
           isTextVisible ? "opacity-100 blur-none" : "opacity-0 blur-sm"
         }`}>
         <p
-          className="font-poppins text-green-500 text-[50px] font-semibold"
+          className="font-poppins text-green-700 text-[50px] font-semibold"
           style={{ textShadow: "0 0 3px white, 0 0 10px white" }}>
           세상 어디든
         </p>

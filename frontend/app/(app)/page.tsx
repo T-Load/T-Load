@@ -1,12 +1,9 @@
 "use client";
 
-import Button from "@components/button/Button";
-import { Button as NextUIButton } from "@nextui-org/react";
-import { useEffect, useState } from "react";
+import MainForm from "@components/common/MainForm";
+import { useEffect } from "react";
 
-export default function CustomButton() {
-  const [userData, setUserData] = useState(null);
-
+export default function MainPage() {
   useEffect(() => {
     const fetchData = async () => {
       const url = "https://fd82-1-237-90-238.ngrok-free.app/api/users/profile/1";
@@ -41,18 +38,8 @@ export default function CustomButton() {
   }, []);
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      {/* NextUI Button with Tailwind CSS */}
-      <NextUIButton className="bg-blue-400 text-white text-sm md:text-lg p-4 rounded-md hover:bg-purple-400">
-        Tailwind + NextUI Button
-      </NextUIButton>
-      <Button
-        size={"s"}
-        color={"primary"}
-        children={undefined}
-        }>
-        dd
-      </Button>
-    </div>
+    <>
+      <MainForm />
+    </>
   );
 }

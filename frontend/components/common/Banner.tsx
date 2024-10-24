@@ -139,12 +139,12 @@ const Banner = () => {
         ))}
 
         <div
-          className="absolute left-4 top-1/2 -translate-y-1/2 cursor-pointer bg-white bg-opacity-50 p-4 border-2 rounded-lg text-white"
+          className="absolute left-4 top-2/3 -translate-y-1/2 cursor-pointer bg-white bg-opacity-50 p-4 border-2 rounded-lg text-white"
           onClick={() => scroll("left")}>
           {"<"}
         </div>
         <div
-          className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer bg-white bg-opacity-50 p-4 border-2 rounded-lg text-white"
+          className="absolute right-4 top-2/3 -translate-y-1/2 cursor-pointer bg-white bg-opacity-50 p-4 border-2 rounded-lg text-white"
           onClick={() => scroll("right")}>
           {">"}
         </div>

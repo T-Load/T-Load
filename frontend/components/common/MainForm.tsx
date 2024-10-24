@@ -1,4 +1,5 @@
 import Banner from "./Banner";
+import Footer from "./Footer";
 import MainInfo from "./MainInfo";
 
 const MainForm = () => {
@@ -6,7 +7,7 @@ const MainForm = () => {
     <>
       <MainInfo />
       <Banner />
-      <div>dds</div>
+      <Footer />
     </>
   );
 };

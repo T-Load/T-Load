@@ -1,13 +1,13 @@
 export const buttonSize: {
   [size: string]: string;
 } = {
-  xs: "h-[29px] text-[12px] font-medium rounded-[10px] px-[14px] py-[6px]",
-  s: "h-[37px] text-[12px] font-medium rounded-[12px] px-[14px] py-[10px]",
-  m: "h-[40px] text-[14px] font-medium rounded-[14px] px-[14px] py-[10px]",
-  l: "h-[48px] text-[14px] font-bold rounded-[16px] px-[18px] py-[14px]",
-  xl: "h-[52px] text-[16px] font-bold rounded-[16px] px-[18px] py-[14px]",
-  "2xl": "h-[56px] text-[18px] font-bold rounded-[16px] px-[20px] py-[15px]",
-  "3xl": "h-[72px] text-[22px] font-bold rounded-[20px] px-[24px] py-[20px]",
+  xs: "h-7 text-xs font-medium rounded-md px-3 py-1.5",
+  s: "h-9 text-xs font-medium rounded-md px-3 py-2.5",
+  m: "h-10 text-sm font-medium rounded-lg px-3.5 py-2.5",
+  l: "h-12 text-sm font-bold rounded-lg px-4 py-3",
+  xl: "h-13 text-md font-bold rounded-lg px- py-3",
+  "2xl": "h-14 text-lg font-bold rounded-lg px-5 py-4",
+  "3xl": "h-18 text-2xl font-bold rounded-xl px-6 py-5",
 };
 
 export type buttonSizeType = "xs" | "s" | "m" | "l" | "xl" | "2xl" | "3xl";

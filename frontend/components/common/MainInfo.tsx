@@ -1,6 +1,8 @@
 "use client";
 
+import Button from "@components/button/Button";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const MainInfo = () => {
@@ -33,7 +35,12 @@ const MainInfo = () => {
           style={{ textShadow: "0 0 3px white, 0 0 10px white" }}>
           세상 어디든
         </p>
-        <p className="font-poppins text-[60px] font-bold">Trip with T-Load</p>
+        <p className="font-poppins text-[60px] font-bold mb-5">Trip with T-Load</p>
+        <Link href={"/edit"} className="flex-center">
+          <Button size={"3xl"} color={"primary"}>
+            {"Go! T-Load ▶"}
+          </Button>
+        </Link>
       </div>
     </div>
   );

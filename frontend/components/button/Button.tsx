@@ -5,7 +5,7 @@ interface ButtonProps {
   color: buttonColorType;
   isLoading?: boolean;
   children: React.ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const Button = ({ size, color, isLoading, children, onClick, ...rest }: ButtonProps) => {
@@ -15,7 +15,6 @@ const Button = ({ size, color, isLoading, children, onClick, ...rest }: ButtonPr
   return (
     <>
       <button className={`flex-center ${sizeClass} ${colorClass}`} disabled={isLoading} onClick={onClick} {...rest}>
-        {" "}
         {isLoading ? "Loading.." : children}
       </button>
     </>

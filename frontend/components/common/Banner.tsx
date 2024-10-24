@@ -113,7 +113,14 @@ const Banner = () => {
 
   return (
     <div className="relative h-full min-h-[240px] w-full overflow-hidden">
-      <div ref={bannerContainerRef} className="flex h-full min-h-[240px] w-full overflow-hidden">
+      <div className="flex-center text-green-700 font-poppins font-bold text-[50px] flex-col gap-8 mt-24 mb-16">
+        <p>당신만의 추억을 Load하고 싶고</p>
+        <p>걷고 싶은 Load는 어디신가요?</p>
+      </div>
+      <div
+        ref={bannerContainerRef}
+        className="flex h-full min-h-[240px] overflow-hidden"
+        style={{ width: `${100 * bannerImageList.length}` }}>
         {bannerImageList.map((image, idx) => (
           <div key={idx} className="relative w-full flex-none">
             <Image className="absolute object-cover" fill src={image.imageUrl} alt="Banner_image" priority />

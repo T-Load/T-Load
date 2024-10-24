@@ -123,3 +123,7 @@ textarea {
   font-weight: 700;
   font-style: normal;
 }
+
+.flex-center {
+  @apply flex items-center justify-center;
+}

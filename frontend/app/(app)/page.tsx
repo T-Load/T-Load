@@ -46,7 +46,13 @@ export default function CustomButton() {
       <NextUIButton className="bg-blue-400 text-white text-sm md:text-lg p-4 rounded-md hover:bg-purple-400">
         Tailwind + NextUI Button
       </NextUIButton>
-      <Button>dd</Button>
+      <Button
+        size={"s"}
+        color={"primary"}
+        children={undefined}
+        }>
+        dd
+      </Button>
     </div>
   );
 }
